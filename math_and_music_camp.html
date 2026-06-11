@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math and Music Camp — Summer 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #E8860A;
+    --orange-light: #F5A623;
+    --cream: #F5EDD8;
+    --cream-dark: #EDE0C4;
+    --brown: #2C1A0E;
+    --white: #FFFFFF;
+    --bg: #FDFAF4;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--brown);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 3px solid var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    color: var(--orange);
+    letter-spacing: 0.5px;
+  }
+  nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+  nav ul a {
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--brown);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange) !important;
+    color: white !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 50px;
+  }
+  .nav-cta:hover { background: var(--orange-light) !important; }
+
+  /* HERO */
+  .hero {
+    background: var(--cream);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-symbols {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .sym {
+    position: absolute;
+    font-family: 'Fredoka One', cursive;
+    color: var(--brown);
+    opacity: 0.08;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+  .note-deco {
+    position: absolute;
+    opacity: 0.12;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.95;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+  .hero h1 .sub {
+    display: block;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    color: var(--brown);
+  }
+  .hero-detail {
+    font-size: 1.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 1.5rem 0 0.4rem;
+    color: var(--brown);
+  }
+  .hero-sub-detail {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 2rem;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.85rem 2.25rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #9e5c04;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #9e5c04; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--brown);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.85rem 2.25rem;
+    border: 2.5px solid var(--brown);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-secondary:hover { background: var(--cream-dark); }
+
+  .blob-wrap {
+    position: relative;
+    display: inline-block;
+    padding: 2rem 3rem 1.5rem;
+  }
+  .blob-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+    z-index: 0;
+    opacity: 0.7;
+  }
+  .blob-wrap > * { position: relative; z-index: 1; }
+
+  /* STATS STRIP */
+  .stats {
+    background: var(--brown);
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    gap: 1.5rem;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.9rem;
+    color: var(--orange-light);
+    display: block;
+    letter-spacing: 0.5px;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  /* SECTIONS */
+  .section { padding: 4rem 2rem; max-width: 980px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--orange);
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+  .section-rule {
+    width: 60px;
+    height: 4px;
+    background: var(--orange);
+    border-radius: 99px;
+    margin: 0.5rem auto 1rem;
+  }
+  .section-sub {
+    text-align: center;
+    font-weight: 800;
+    color: var(--brown);
+    opacity: 0.65;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ACTIVITY CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1.25rem;
+  }
+  .card {
+    background: var(--white);
+    border: 2.5px solid var(--cream-dark);
+    border-radius: 18px;
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--orange);
+    box-shadow: 0 8px 24px rgba(232, 134, 10, 0.12);
+  }
+  .card-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+  .card p { font-size: 0.88rem; font-weight: 700; color: #5a3e2b; line-height: 1.6; }
+
+  /* INFO SECTION */
+  .info-bg { background: var(--cream); }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .info-box {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    border: 2px solid var(--cream-dark);
+  }
+  .info-box-icon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    background: var(--orange);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    margin-top: 2px;
+  }
+  .info-box h4 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.35rem;
+  }
+  .info-box p { font-size: 0.88rem; font-weight: 700; color: #5a3e2b; line-height: 1.65; }
+
+  /* AGE BADGES */
+  .age-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0 0;
+    flex-wrap: wrap;
+  }
+  .age-badge {
+    background: var(--brown);
+    color: var(--cream);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+  }
+  .age-badge span {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 1px;
+  }
+
+  /* CTA */
+  .cta-banner {
+    background: var(--orange);
+    color: white;
+    text-align: center;
+    padding: 4.5rem 2rem;
+  }
+  .cta-banner h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+  }
+  .cta-banner p {
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+  .btn-white {
+    background: white;
+    color: var(--orange);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.9rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+    transition: transform 0.15s;
+  }
+  .btn-white:hover { transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--brown);
+    color: var(--cream);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  footer a { color: var(--orange-light); text-decoration: none; }
+
+  .scatter {
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--brown);
+    opacity: 0.18;
+    letter-spacing: 2.5rem;
+    padding: 0.5rem 0;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Math and Music Camp</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#register" class="nav-cta">Register</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-symbols">
+    <span class="sym" style="top:8%;left:4%;font-size:2.5rem;">+</span>
+    <span class="sym" style="top:15%;left:12%;font-size:1.4rem;">x</span>
+    <span class="sym" style="top:5%;left:20%;font-size:1.8rem;">-</span>
+    <span class="sym" style="top:12%;right:8%;font-size:2.2rem;">x</span>
+    <span class="sym" style="top:22%;right:18%;font-size:1.5rem;">-</span>
+    <span class="sym" style="bottom:10%;left:6%;font-size:2rem;">+</span>
+    <span class="sym" style="bottom:8%;left:22%;font-size:1.6rem;">÷</span>
+    <span class="sym" style="bottom:12%;right:10%;font-size:2rem;">x</span>
+    <svg class="note-deco" style="top:18%;left:5%;width:60px;" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 60V20l30-8v8L20 28v32" stroke="#2C1A0E" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="14" cy="62" r="8" fill="#2C1A0E"/>
+      <circle cx="44" cy="24" r="8" fill="#2C1A0E"/>
+    </svg>
+    <svg class="note-deco" style="top:14%;right:6%;width:40px;" viewBox="0 0 40 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 42V10l16-4v6l-16 4v26" stroke="#2C1A0E" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="9" cy="44" r="6" fill="#2C1A0E"/>
+      <circle cx="25" cy="14" r="6" fill="#2C1A0E"/>
+    </svg>
+  </div>
+
+  <p class="hero-eyebrow">Ages 6-7 and 8-9 — Summer 2025</p>
+
+  <div class="blob-wrap">
+    <h1>
+      Math<br>and Music
+      <span class="sub">Camp</span>
+    </h1>
+    <p class="hero-detail">8AM – 1:30PM &nbsp;|&nbsp; 3PM Extended</p>
+    <p class="hero-sub-detail">Week 1: July 6–10 &nbsp;·&nbsp; 5431 Sepulveda Blvd</p>
+  </div>
+
+  <div class="age-badges">
+    <div class="age-badge"><span>Ages</span>6–7</div>
+    <div class="age-badge"><span>Ages</span>8–9</div>
+  </div>
+
+  <div class="hero-btns">
+    <a href="#register" class="btn-primary">Register Now</a>
+    <a href="#details" class="btn-secondary">Learn More</a>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats">
+  <div class="stat">
+    <span class="stat-num">Week 1</span>
+    <span class="stat-label">July 6–10</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">Ages 6–9</span>
+    <span class="stat-label">Two groups</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">$380</span>
+    <span class="stat-label">$430 extended care</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">8AM–1:30</span>
+    <span class="stat-label">3PM extended option</span>
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<div class="section" id="activities">
+  <h2 class="section-title">Activities</h2>
+  <div class="section-rule"></div>
+  <p class="section-sub">Learn, explore, and play every day</p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">&#9835;</div>
+      <h3>Music Fundamentals</h3>
+      <p>Learn rhythm, melody, and musical notation through hands-on instruments and guided play.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#8730;</div>
+      <h3>Math Exploration</h3>
+      <p>Discover numbers, patterns, and problem solving through games and creative challenges.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9836;</div>
+      <h3>Rhythm and Fractions</h3>
+      <p>See how beats and time signatures connect directly to fractions and division.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9824;</div>
+      <h3>Indoor Play Structure</h3>
+      <p>Free play and physical activity on our indoor play structure between sessions.</p>
+    </div>
+  </div>
+</div>
+
+<div class="scatter">+ x - ÷ + x</div>
+
+<!-- DETAILS -->
+<div class="info-bg" id="details">
+  <div class="section">
+    <h2 class="section-title">Camp Details</h2>
+    <div class="section-rule"></div>
+    <p class="section-sub">Everything you need to know</p>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="info-box-icon">&#128197;</div>
+        <div>
+          <h4>Dates</h4>
+          <p>Week 1: July 6–10, 2025<br>More weeks coming soon — check back for updates.</p>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-icon">&#128205;</div>
+        <div>
+          <h4>Location</h4>
+          <p>5431 Sepulveda Blvd<br>Los Angeles, CA</p>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-icon">&#9200;</div>
+        <div>
+          <h4>Hours</h4>
+          <p>8:00AM – 1:30PM daily<br>Extended care until 3:00PM available</p>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-icon">&#127891;</div>
+        <div>
+          <h4>Ages</h4>
+          <p>Group 1: Ages 6–7<br>Group 2: Ages 8–9<br>Age-appropriate curriculum for each group</p>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-icon">&#128176;</div>
+        <div>
+          <h4>Tuition</h4>
+          <p>$380 per week<br>$430 with extended care to 3PM</p>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-icon">&#9993;</div>
+        <div>
+          <h4>Questions?</h4>
+          <p>Reach out and we will get back to you as soon as possible with everything you need to know.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-banner" id="register">
+  <h2>Ready to Join Camp?</h2>
+  <p>Spots are limited — secure your camper's place today</p>
+  <button class="btn-white">Register for Summer 2025</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Math and Music Camp &nbsp;·&nbsp; 5431 Sepulveda Blvd &nbsp;·&nbsp; Summer 2025 &nbsp;·&nbsp; <a href="#">Contact Us</a></p>
+</footer>
+
+</body>
+</html>
